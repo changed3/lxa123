@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team_three.project.mapper.BankcardMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.team_three.project.entity.Bankcard">
+        <id column="id" property="id" />
+        <result column="bank_card_id" property="bankCardId" />
+        <result column="bank_card_number" property="bankCardNumber" />
+        <result column="bank_card_password" property="bankCardPassword" />
+        <result column="bank_card_money" property="bankCardMoney" />
+        <result column="bank_card_id_card" property="bankCardIdCard" />
+        <result column="bank_card_type" property="bankCardType" />
+        <result column="bank_card_create_time" property="bankCardCreateTime" />
+        <result column="bank_card_update_time" property="bankCardUpdateTime" />
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bank_card_id, bank_card_number, bank_card_password, bank_card_money, bank_card_id_card, bank_card_type, bank_card_create_time, bank_card_update_time
+    </sql>
+
+
+
+    <select id="findByBankcardId" parameterType="int" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_bankcard
+        where
+        bank_card_id = #{bankCardId}
+    </select>
+    <update id="updateBankcard" parameterType="Bankcard">
+        update
+            t_bankcard
+        set
+            bank_card_money = #{bankCardMoney}
+        where
+            bank_card_id = #{bankCardId}
+    </update>
+
+</mapper>

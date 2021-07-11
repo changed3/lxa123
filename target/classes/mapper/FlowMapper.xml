@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team_three.project.mapper.FlowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.team_three.project.entity.Flow">
+        <id column="id" property="id" />
+        <result column="flow_id" property="flowId" />
+        <result column="flow_order_number" property="flowOrderNumber" />
+        <result column="flow_user_name" property="flowUserName" />
+        <result column="flow_money" property="flowMoney" />
+        <result column="flow_type" property="flowType" />
+        <result column="flow_bank_number" property="flowBankNumber" />
+        <result column="flow_status" property="flowStatus" />
+        <result column="flow_create_time" property="flowCreateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, flow_id, flow_order_number, flow_user_name, flow_money, flow_type, flow_bank_number, flow_status, flow_create_time
+    </sql>
+    <insert id="addFlow" parameterType="Flow">
+        insert into t_flow(id,flow_id,flow_order_number,flow_user_name,flow_money,flow_type,flow_bank_number,flow_status,flow_create_time)
+        values (null ,#{flowId},#{flowOrderNumber},#{flowUserName},#{flowMoney},#{flowType},#{flowBankNumber},#{flowStatus},now())
+
+    </insert>
+    <select id="selectAll" parameterType="int" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_flow
+        where
+            flow_id = #{flowId}
+    </select>
+
+</mapper>

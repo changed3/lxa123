@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team_three.project.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.team_three.project.entity.User">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="user_password" property="userPassword" />
+        <result column="user_phone" property="userPhone" />
+        <result column="user_id_card" property="userIdCard" />
+        <result column="user_status" property="userStatus" />
+        <result column="user_create_time" property="userCreateTime" />
+        <result column="user_update_time" property="userUpdateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_name, user_password, user_phone, user_id_card, user_status, user_create_time, user_update_time
+    </sql>
+
+    <!-- 用户登录 -->
+    <select id="findByUserName" resultMap="BaseResultMap" parameterType="String">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_user
+        where user_name = #{userName}
+    </select>
+
+    <!-- 用户注册 -->
+    <insert id="register" parameterType="com.team_three.project.entity.User" >
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="userPassword != null" >
+                user_password,
+            </if>
+            <if test="userPhone != null" >
+                user_phone,
+            </if>
+            <if test="userIdCard != null" >
+                user_id_card,
+            </if>
+            <if test="userStatus != null" >
+                user_status,
+            </if>
+            <if test="userCreateTime != null" >
+                user_create_time,
+            </if>
+            <if test="userUpdateTime != null" >
+                user_update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null" >
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null" >
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userIdCard != null" >
+                #{userIdCard,jdbcType=INTEGER},
+            </if>
+            <if test="userStatus != null" >
+                #{userStatus,jdbcType=INTEGER},
+            </if>
+            <if test="userCreateTime != null" >
+                #{userCreateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="userUpdateTime != null" >
+                #{userUpdateTime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
